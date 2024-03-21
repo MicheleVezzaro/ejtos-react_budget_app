@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
 const AllocationForm = (props) => {
-    const { dispatch,remaining  } = useContext(AppContext);
+    const { dispatch,  remaining, currency  } = useContext(AppContext);
     const [name, setName] = useState('');
     const [cost, setCost] = useState('');
     const [action, setAction] = useState('');
     const submitEvent = () => {
-        if(cost > remaining) {
+        if(cost > 20000) {
             alert("The value cannot exceed remaining funds  £"+remaining);
             setCost("");
             return;
@@ -50,15 +50,18 @@ const AllocationForm = (props) => {
                         <option defaultValue value="Add" name="Add">Add</option>
                         <option value="Reduce" name="Reduce">Reduce</option>
                     </select>
-                    <input
-                        required='required'
-                        type='number'
-                        id='cost'
-                        value={cost}
-                        style={{ marginLeft: '2rem' , size: 10}}
-                        onChange={(event) => setCost(event.target.value)}>
-                    </input>
-                    <button className="btn btn-primary" onClick={submitEvent} style={{ marginLeft: '2rem' }}>
+                    <div>
+                        <span class='ms-2'>{currency}</span>
+                        <input
+                            required='required'
+                            type='number'
+                            id='cost'
+                            value={cost}
+                            style={{marginLeft: '1rem', size: 10}}
+                            onChange={(event) => setCost(event.target.value)}>
+                        </input>
+                    </div>
+                    <button className="btn btn-primary" onClick={submitEvent} style={{marginLeft: '2rem'}}>
                         Save
                     </button>
                 </div>
